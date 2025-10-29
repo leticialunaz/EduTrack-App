@@ -1,0 +1,128 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  margin: 0;
+  padding: 0;
+  display: block;
+  place-items: initial;
+  min-height: auto;
+  min-width: auto;
+  color: #333;
+}
+
+#root {
+  height: 100vh ;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: initial;
+}
+
+/* Container principal para centralizar toda a página */
+.menu-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+nav li {
+  width: 100%;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+#menu-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em;
+  color: #1c1c1c;
+  font-weight: bold;
+  margin-bottom: 40px;
+  text-align: center;
+  font-family: Inter, Inter;
+  line-height: 1.2;
+}
+
+.botaoquest,
+.botaofeedback {
+  display: flex;
+  background-color: #1c1c1c;
+  color: white;
+  padding: 15px 400px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-decoration: none;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  font-size: 1.2em;
+  font-weight: 500;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.botaoquest:hover,
+.botaofeedback:hover {
+  background-color: #333;
+  color: white;
+  text-decoration: none;
+}
+
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #333;
+  padding: 10px 24px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
+  width: 100%;
+  max-width: 300px;
+  font-family: Arial, sans-serif;
+  font-weight: normal;
+}
+
+
+/* Estilo para o container de help */
+.help-container {
+  margin-top: 20px;
+  max-width: 400px;
+  width: 100%;
+}
+
+
+

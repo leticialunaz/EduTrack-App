@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../../css/styles.css';
+import '../../css/styleMenu.css';
 
 export default function MenuAluno() {
   const [help, setHelp] = useState(false);
