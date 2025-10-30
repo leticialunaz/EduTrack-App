@@ -8,6 +8,8 @@ import Login from "./pages/Login.jsx";
 import MenuAluno from "./pages/aluno/MenuAluno.jsx";
 import Questionario from "./pages/aluno/Questionario.jsx";
 import Simulacao from "./pages/aluno/Simulacao.jsx";
+import Sidebar from "./components/SidebarAluno.jsx";
+
 
 
 
@@ -20,11 +22,14 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/cadastroAluno" element={<CadastroAluno />} />
         <Route path="/cadastroAdmin" element={<CadastroAdmin />} />
-        <Route path="/feedbackAdmin" element={<FeedbackAdmin />} />
-        <Route path="/feedbackAluno" element={<FeedbackAluno />} />
-        <Route path="/menuAluno" element={<MenuAluno />} />
-        <Route path="/questionario" element={<Questionario />} />
-        <Route path="/simulacao" element={<Simulacao />} />
+
+        <Route element={<Sidebar/>}>
+          <Route path="/feedbackAdmin" element={<FeedbackAdmin />} />
+          <Route path="/feedbackAluno" element={<FeedbackAluno />} />
+          <Route path="/menuAluno" element={<MenuAluno />} />
+          <Route path="/questionario" element={<Questionario />} />
+          <Route path="/simulacao" element={<Simulacao />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );
