@@ -1,0 +1,115 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #fff;
+  font-family: "Poppins", sans-serif;
+}
+
+.titulo {
+  font-size: 48px;
+  font-weight: 800;
+  margin-bottom: 40px;
+  color: #000;
+}
+
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 320px;
+  gap: 15px;
+}
+
+.input-group {
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 40px 12px 12px;
+  border: none;
+  border-radius: 6px;
+  background-color: #f3f3f3;
+  font-size: 15px;
+  outline: none;
+}
+
+.icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #555;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+/* Link “esqueci a senha” */
+.forgot-password {
+  text-align: right;
+  font-size: 13px;
+  color: #e25b5b;
+  text-decoration: none;
+  margin-top: -5px;
+}
+
+/* Botão principal */
+.btn-login {
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.btn-login:hover {
+  opacity: 0.85;
+}
+
+/* Botão SIGAA */
+.btn-sigaa {
+    color: #000;
+  background-color: #fff;
+  border: 1.5px solid #ccc;
+  border-radius: 30px;
+  padding: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s;
+}
+
+.btn-sigaa:hover {
+  background-color: #f8f8f8;
+}
+
+.ufcg {
+  width: 25px;
+  height: 25px;
+}
+
+/* Link de cadastro */
+.signup {
+  text-align: center;
+  font-size: 13px;
+  text-decoration: none;
+  color: #000;
+  margin-top: 5px;
+}
+
+.signup:hover {
+  text-decoration: underline;
+}

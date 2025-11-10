@@ -23,7 +23,7 @@ function Sidebar() {
       </button>
         </div>
         <nav>
-          <ul>
+          <ul className="items">
             <li><Link to="/menuAluno"><img src={MenuIcon}/>Menu</Link></li>
             <li><Link to="/questionario"><img src={FormularioIcon}/>Formulário</Link></li>
             <li><Link to="/feedbackAluno"><img src={RelatorioIcon}/>Relatório</Link></li>
