@@ -1,0 +1,50 @@
+.perg-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 4px #cfcfcf;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.pergunta-bloco {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.pergunta-titulo {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.pergunta-opcoes {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.radio-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #f0f0f0;
+  padding: 8px 15px;
+  border-radius: 20px;
+}
+
+.radio-pill input {
+  accent-color: black;
+}
+
+.btn-enviar {
+  width: 160px;
+  margin: 0 auto;
+  padding: 12px;
+  background: black;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}

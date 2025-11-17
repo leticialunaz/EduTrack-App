@@ -1,4 +1,3 @@
-export default function Simulacao() {
-	return <h1>Simulação</h1>;
+export default function FeedbackAluno() {
+	return <h1>Feedback - Aluno</h1>;
 }
-

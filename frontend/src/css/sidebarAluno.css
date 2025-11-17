@@ -2,6 +2,8 @@
 .layout {
   display: flex;
   min-height: 100vh;
+  height: auto;
+  overflow: visible;
   margin: 0;
   padding: 0;
 }
@@ -12,6 +14,7 @@
   top: 0;
   width: 250px;
   height: 100vh;
+  overflow-y: auto;
   background-color: #FFFF;
   padding: 20px;
   transform: translateX(-100%);
@@ -52,6 +55,9 @@
   padding: 20px;
   margin-left: 0;
   transition: margin-left 0.3s ease;
+  overflow-y: auto;
+  height: auto;
+  min-height: 100vh;
 }
 
 
@@ -97,4 +103,42 @@
 .titulo {
   margin: 0 0 30px 0;
   font-size: 30px;
+}
+
+/* trava overflow horizontal global (impede a scrollbar horizontal) */
+html, body {
+  overflow-x: hidden !important;
+}
+
+/* evita que elementos filhos “vazem” para fora da layout */
+.layout {
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* conteudo não pode estourar a largura disponível */
+.conteudo {
+  box-sizing: border-box;
+  max-width: calc(100% - 0px); /* garante que não exceda a viewport */
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+/* a sidebar permanece fixa, mas sem interferir na largura do fluxo */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 250px;
+  height: 100vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* remova essa propriedade que pode causar overflow lateral */
+.sidebar.ativa {
+  transform: translateX(0);
+  /* REMOVA margin-right: -100% pois pode causar largura negativa e overflow */
 }

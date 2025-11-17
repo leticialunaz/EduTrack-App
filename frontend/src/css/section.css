@@ -1,0 +1,18 @@
+.section-subtabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.section-subtabs button {
+  background: #ededed;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.section-subtabs button.active {
+  background: #d7d7d7;
+  font-weight: bold;
+}

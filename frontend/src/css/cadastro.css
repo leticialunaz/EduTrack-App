@@ -62,13 +62,14 @@
 .btn-login {
   background-color: #000;
   color: #fff;
-  border: none;
+  border: 1.5px solid #000;
   border-radius: 30px;
   padding: 12px;
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
   transition: opacity 0.3s;
+  margin: auto;
 }
 
 .btn-login:hover {

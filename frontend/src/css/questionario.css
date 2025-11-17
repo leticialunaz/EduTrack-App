@@ -1,0 +1,40 @@
+html, body {
+  height: auto;
+  overflow-y: auto;
+}
+
+.qst-container {
+  width: 150%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+}
+
+.qst-tabs {
+  display: flex;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.qst-tabs button {
+  background: #e8e8e8;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+
+.qst-tabs button.active {
+  background: #d0d0d0;
+  font-weight: bold;
+}
+
+.qst-content {
+  margin:auto;
+  width: auto;
+  background: #f3f3f3;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 5px #ccc;
+}
