@@ -60,6 +60,12 @@ export default function Institucional() {
     ]
   ];
 
+  const titulos = [
+    "Adaptação à instituição",
+    "Adaptação ao curso",
+    "Financeiro",
+    "Relacionamento com Professores"
+  ];
 
  const [index, setIndex] = useState(0);
 
@@ -74,7 +80,7 @@ export default function Institucional() {
       <div className="section-subtabs">
         {sub.map((_, i) => (
           <button key={i} className={i === index ? "active" : ""} onClick={() => setIndex(i)}>
-            Grupo {i + 1}
+            {titulos[i]}
           </button>
         ))}
       </div>
