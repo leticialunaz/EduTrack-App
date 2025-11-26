@@ -3,6 +3,7 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  background-color: #f2f2f2;
 }
 
 .logo {
@@ -41,8 +42,5 @@
   color: #888;
 }
 
-html, body {
-  height: auto !important;
-  overflow-y: auto !important;
-}
+
 

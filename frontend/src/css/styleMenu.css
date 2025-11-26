@@ -1,33 +1,13 @@
-/* Reset básico */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
-  height: 100%;
-  font-family: Arial, sans-serif;
-  background-color: #f5f5f5;
-  margin: 0;
-  padding: 0;
-  display: block;
-  place-items: initial;
-  min-height: auto;
-  min-width: auto;
-  color: #333;
+body,html {
+  overflow-x: hidden;
 }
 
-#root {
-  height: 100vh ;
-  max-width: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: initial;
-}
 
 /* Container principal para centralizar toda a página */
 .menu-container {
@@ -35,12 +15,10 @@ html, body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
-  max-width: 500px;
-  padding: 40px;
+  padding: 250px;
   box-sizing: border-box;
   text-align: center;
-  margin-top: 200px;
+  margin-top: 20px;
 }
 
 nav ul {
@@ -69,9 +47,7 @@ nav li {
   color: #1c1c1c;
   font-weight: bold;
   margin-bottom: 40px;
-  text-align: center;
   font-family: Inter, Inter;
-  line-height: 1.2;
 }
 
 .botaoquest,
@@ -80,15 +56,13 @@ nav li {
   background-color: #1c1c1c;
   color: white;
   padding: 15px 400px;
-  border: none;
   border-radius: 6px;
   cursor: pointer;
-  text-decoration: none;
   text-align: center;
   transition: background-color 0.3s ease;
   justify-content: center;
   align-items: center;
-  width: 30%;
+  width: 50%;
   font-size: 1.2em;
   font-weight: 500;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
@@ -96,34 +70,26 @@ nav li {
 
 .botaoquest:hover,
 .botaofeedback:hover {
-  background-color: #333;
+  background-color: #4d4c4c;
   color: white;
-  text-decoration: none;
-}
-
-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #333;
-  padding: 10px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 1em;
-  width: 100%;
-  max-width: 300px;
-  font-family: Arial, sans-serif;
-  font-weight: normal;
 }
 
 
-/* Estilo para o container de help */
-.help-container {
-  margin-top: 20px;
-  max-width: 400px;
-  width: 100%;
-}
 
+
+@media (max-width: 768px) {
+  .menu-container {
+    padding: 50px 150px;
+    margin-top: 150px;
+    min-height: 100vh;
+  }
+
+  .botaoquest,
+  .botaofeedback {
+    padding: 30px 15px;;
+    font-size: 1em;
+    width: 100%;
+  }
+}
 
 

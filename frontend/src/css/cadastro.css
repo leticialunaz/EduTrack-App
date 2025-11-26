@@ -68,8 +68,11 @@
   font-weight: 600;
   font-size: 15px;
   cursor: pointer;
-  transition: opacity 0.3s;
-  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background-color 0.3s;
 }
 
 .btn-login:hover {
@@ -78,7 +81,7 @@
 
 /* Botão SIGAA */
 .btn-sigaa {
-    color: #000;
+  color: #000;
   background-color: #fff;
   border: 1.5px solid #ccc;
   border-radius: 30px;
