@@ -9,7 +9,7 @@ html, body {
 .qst-container {
   width: 100%;
   max-width: 900px; 
-  padding-top: 900px; 
+  padding-top: auto; 
   display: flex;
   flex-direction: column;
   align-items: center; 
@@ -43,3 +43,5 @@ html, body {
   border-radius: 15px;
   box-shadow: 0 0 5px #ccc;
 }
+
+
