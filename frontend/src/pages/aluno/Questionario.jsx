@@ -7,6 +7,7 @@ import Estudo from "./sections/Estudo";
 import Carreira from "./sections/Carreira";
 import Pessoal from "./sections/Pessoal";
 
+
 export default function Questionario() {
   const [aba, setAba] = useState("institucional");
 
@@ -17,6 +18,7 @@ export default function Questionario() {
     carreira: <Carreira />,
     pessoal: <Pessoal />,
   };
+
 
   return (
     <div className="qst-container">
@@ -35,3 +37,4 @@ export default function Questionario() {
     </div>
   );
 }
+

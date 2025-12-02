@@ -48,3 +48,28 @@
   cursor: pointer;
   border: none;
 }
+
+
+@media screen and (max-width: 730px) {
+  .perg-box {
+    padding: auto;
+    margin: 0 auto;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .pergunta-titulo {
+    font-size: 14px;
+  }
+  
+
+  .pergunta-opcoes {
+    flex-direction: column;
+    gap: 10x;
+  }
+
+  .btn-enviar {
+    width: 100%;
+    padding: 10px;
+  }
+}

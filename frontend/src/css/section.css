@@ -16,3 +16,11 @@
   background: #d7d7d7;
   font-weight: bold;
 }
+
+@media screen and (max-width: 730px) {
+  .section-subtabs {
+    flex-direction: column;
+    gap: 10px
+  }
+  
+}
