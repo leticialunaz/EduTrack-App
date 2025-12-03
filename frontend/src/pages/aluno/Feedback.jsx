@@ -1,3 +1,3 @@
 export default function FeedbackAluno() {
-	return <h1>Feedback - Aluno</h1>;
+	return <h1>Em construção!</h1>;
 }
