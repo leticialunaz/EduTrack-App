@@ -7,6 +7,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+app.use("/api", require("../routes/baseRoutes.js"));
+
 app.get("/", (req, res) => {
   res.send("Backend funcionando!");
 });
