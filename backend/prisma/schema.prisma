@@ -13,54 +13,87 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id    Int   @id @default(autoincrement())
-  name    String
-  password    String
-  role    String
+  id             Int             @id @default(autoincrement())
+  cpf            String          @unique
+  name           String
+  email          String?
+  type           String
   StudentAnswers StudentAnswer[]
+  quizAttempts   QuizAttempt[]
 }
 
 model Quiz {
-  id    Int   @id @default(autoincrement())
-  title    String
+  id    Int    @id @default(autoincrement())
+  title String
+
+  topicId Int
+  topic   Topic @relation(fields: [topicId], references: [id])
+
+  attempts QuizAttempt[]
 
   questions Question[]
 }
 
 model Question {
-  id    Int   @id @default(autoincrement())
-  text    String
+  id   Int    @id @default(autoincrement())
+  text String
 
-  quizId    Int
-  quiz Quiz @relation(fields: [quizId], references: [id])
+  quizId Int
+  quiz   Quiz @relation(fields: [quizId], references: [id])
 
-  answers Answer[]
+  answers        Answer[]
   studentAnswers StudentAnswer[]
 }
 
 model Answer {
-  id    Int   @id @default(autoincrement())
-  text    String
+  id   Int    @id @default(autoincrement())
+  text String
 
-  questionId    Int
-  question    Question  @relation(fields: [questionId], references: [id])
+  questionId Int
+  question   Question @relation(fields: [questionId], references: [id])
 
   studentAnswers StudentAnswer[]
-
 }
 
 model StudentAnswer {
-  id    Int   @id @default(autoincrement())
+  id Int @id @default(autoincrement())
 
-  questionId    Int
+  questionId Int
   question   Question @relation(fields: [questionId], references: [id])
 
-  answerId    Int
-  answer     Answer   @relation(fields: [answerId], references: [id])
+  answerId Int
+  answer   Answer @relation(fields: [answerId], references: [id])
 
-  userId    Int
-  user       User     @relation(fields: [userId], references: [id])
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
 
+  attemptId Int
+  attempt   QuizAttempt @relation(fields: [attemptId], references: [id])
+
+  @@unique([attemptId, questionId]) // 1 resposta por pergunta naquela tentativa
+}
+
+model Topic {
+  id   Int    @id @default(autoincrement())
+  name String @unique
+
+  quizzes Quiz[]
+}
+
+model QuizAttempt {
+  id     Int  @id @default(autoincrement())
+  userId Int
+  user   User @relation(fields: [userId], references: [id])
+
+  quizId Int
+  quiz   Quiz @relation(fields: [quizId], references: [id])
+
+  weekStart  DateTime
+  createdAt  DateTime  @default(now())
+  finishedAt DateTime?
+
+  answers StudentAnswer[]
+
+  @@unique([userId, quizId, weekStart]) // impede 2 tentativas do mesmo quiz na mesma semana
 }
