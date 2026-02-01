@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../../css/questionario.css";
 
 import Institucional from "./sections/Institucional";
@@ -6,17 +6,34 @@ import Interpessoal from "./sections/Interpessoal";
 import Estudo from "./sections/Estudo";
 import Carreira from "./sections/Carreira";
 import Pessoal from "./sections/Pessoal";
+import { getAnsweredQuizzes } from "../../services/quiz";
+
 
 
 export default function Questionario() {
   const [aba, setAba] = useState("institucional");
 
+  const [answered, setAnswered] = useState([]);
+
+  useEffect(() => {
+    async function load() {
+      try {
+      const data = await getAnsweredQuizzes();
+      setAnswered(data);
+    } catch (err) {
+      console.error("Erro ao buscar quizzes respondidos", err);
+      setAnswered([]); 
+    }
+  }
+  load();
+}, []);
+  
   const paginas = {
-    institucional: <Institucional />,
-    interpessoal: <Interpessoal />,
-    estudo: <Estudo />,
-    carreira: <Carreira />,
-    pessoal: <Pessoal />,
+    institucional: <Institucional answered={answered} />,
+    interpessoal: <Interpessoal answered={answered} />,
+    estudo: <Estudo answered={answered} />,
+    carreira: <Carreira answered={answered} />,
+    pessoal: <Pessoal answered={answered} />,
   };
 
 
@@ -31,7 +48,7 @@ export default function Questionario() {
         <button className={aba === "pessoal" ? "active" : ""} onClick={() => setAba("pessoal")}>Pessoal</button>
       </div>
 
-      <div className="qst-content">
+      <div className="qst-content" key={aba}>
         {paginas[aba]}
       </div>
     </div>

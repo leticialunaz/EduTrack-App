@@ -2,15 +2,18 @@ import { useState } from "react";
 import "../../../css/section.css";
 import QuizSub from "../sections/QuizSub";
 
-const QUIZ_IDS = [6, 7, 8];
+const QUIZ_IDS = [1, 2, 3];
 const TITULOS_CARREIRA = [
   "Desenvolvimento de carreira",
   "Percepção pessoal de competência",
   "Envolvimento em atividades extracurriculares",
 ];
+  
 
-export default function Carreira() {
+export default function Carreira({ answered }) {
   const [index, setIndex] = useState(0);
+  const quizId = QUIZ_IDS[index];
+  const isDone = answered.includes(quizId);
 
   return (
     <div>
@@ -18,7 +21,10 @@ export default function Carreira() {
         {TITULOS_CARREIRA.map((titulo, i) => (
           <button
             key={titulo}
-            className={i === index ? "active" : ""}
+            className={`
+              ${i === index ? "active" : ""}
+              ${answered.includes(QUIZ_IDS[i]) ? "done" : ""}
+            `}
             onClick={() => setIndex(i)}
           >
             {titulo}

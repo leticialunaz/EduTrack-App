@@ -4,6 +4,11 @@ require("dotenv").config();
 
 const app = express();
 
+app.use(cors({
+  origin: ["http://localhost:5173"],
+  credentials: true,
+}));
+
 app.use(cors());
 app.use(express.json());
 
@@ -11,6 +16,8 @@ app.use(express.json());
 app.use("/api", require("../routes/baseRoutes.js"));
 app.use("/api/auth", require("../routes/authRoutes.js"));
 app.use("/api/quiz", require("../routes/quizRoutes.js"));
+app.use("/api/consent", require("../routes/consentRoutes"));
+app.use("/api/grades", require("../routes/gradesRoutes"));
 
 
 app.get("/", (req, res) => {

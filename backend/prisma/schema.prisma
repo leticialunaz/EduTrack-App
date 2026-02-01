@@ -19,8 +19,15 @@ model User {
   name           String
   email          String?
   type           String
+
+
+  gradesSyncedAt DateTime?
+  consentAccepted Boolean     @default(false)
+  consentAt       DateTime?
+
   StudentAnswers StudentAnswer[]
   quizAttempts   QuizAttempt[]
+  grades StudentGrade[]
 }
 
 model Quiz {
@@ -96,4 +103,25 @@ model QuizAttempt {
   answers StudentAnswer[]
 
   @@unique([userId, quizId, weekStart]) // impede 2 tentativas do mesmo quiz na mesma semana
+}
+
+
+model Discipline {
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+
+  grades StudentGrade[]
+}
+
+model StudentGrade {
+  id           Int     @id @default(autoincrement())
+  userId       Int
+  disciplineId Int
+  grade        Float
+  status       String?    // APROVADO | REPROVADO
+
+  user       User       @relation(fields: [userId], references: [id])
+  discipline Discipline @relation(fields: [disciplineId], references: [id])
+
+  @@unique([userId, disciplineId])
 }

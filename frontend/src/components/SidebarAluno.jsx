@@ -7,6 +7,7 @@ import FormularioIcon from '../assets/formulario.svg';
 
 
 function Sidebar() {
+  //inicia como fechada
   const [aberta, setAberta] = useState(false);
 
   return (

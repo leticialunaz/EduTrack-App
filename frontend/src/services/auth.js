@@ -1,5 +1,6 @@
 import { api } from "./api";
 
+//função para realizar login e armazenar o token de autenticação
 export async function login(username, password) {
   const { data } = await api.post("/auth/login", { username, password });
   // guarda token

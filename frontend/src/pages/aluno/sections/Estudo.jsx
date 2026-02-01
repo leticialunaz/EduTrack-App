@@ -3,7 +3,7 @@ import "../../../css/section.css";
 import QuizSub from "../sections/QuizSub";
 
 
-  const QUIZ_IDS_ESTUDO = [9, 10, 11, 12];
+  const QUIZ_IDS_ESTUDO = [4, 5, 6, 7];
   const TITULOS_ESTUDO = [
   "Métodos de estudo",
   "Gestão do tempo",
@@ -12,16 +12,21 @@ import QuizSub from "../sections/QuizSub";
   ];
 
 
- export default function Estudo() {
+ export default function Estudo({ answered }) {
    const [index, setIndex] = useState(0);
- 
+   const quizId = QUIZ_IDS_ESTUDO[index];
+   const isDone = answered.includes(quizId);
+
    return (
      <div>
        <div className="section-subtabs">
          {TITULOS_ESTUDO.map((titulo, i) => (
            <button
              key={titulo}
-             className={i === index ? "active" : ""}
+             className={`
+              ${i === index ? "active" : ""}
+              ${answered.includes(QUIZ_IDS_ESTUDO[i]) ? "done" : ""}
+            `}
              onClick={() => setIndex(i)}
            >
              {titulo}

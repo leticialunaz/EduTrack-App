@@ -17,6 +17,21 @@
   font-weight: bold;
 }
 
+button.done {
+  background: #1e7f43;
+  color: white;
+  cursor: not-allowed;
+}
+
+.quiz-done {
+  background: #e6f7ec;
+  border: 2px solid #1e7f43;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+
 @media screen and (max-width: 730px) {
   .section-subtabs {
     flex-direction: column;

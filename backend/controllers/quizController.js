@@ -27,6 +27,9 @@ async function submitAnswers(req, res) {
 
     const attempt = await quizService.getOrCreateAttempt(appUser.id, qid);
 
+    if (attempt.finishedAt) {
+      return res.status(409).json({ error: "Questionário já respondido" });
+    }
 
     const saved = await quizService.saveStudentAnswers({
       userId: appUser.id,
@@ -34,11 +37,28 @@ async function submitAnswers(req, res) {
       answers
     });
 
+    await prisma.quizAttempt.update({
+      where: { id: attempt.id },
+      data: { finishedAt: new Date() }
+    });
+
+    if (qid === 13) {
+      const matricula = req.appUser.matricula;
+      if (matricula) {
+        syncGradesOnce({
+          userId: req.appUser.id,
+          token: req.eurecaToken,
+          matricula,
+        }).catch((e) => console.error("Sync grades failed:", e.message));
+      }
+    }
+
     return res.status(201).json({
       message: 'Respostas salvas com sucesso',
       total: saved.count,
       attemptId: attempt.id
     });
+
   } catch (err) {
     console.error('SUBMIT ANSWERS ERROR:', err);
     return res.status(500).json({ error: 'Falha ao salvar respostas', details: err.message });
@@ -79,4 +99,25 @@ async function listQuizzes(req, res) {
   res.json(quizzes);
 }
 
-module.exports = { submitAnswers, getQuiz, listQuizzes };
+async function getAnsweredQuizzes(req, res) {
+  try {
+    const userId = req.appUser.id;
+
+    const attempts = await prisma.quizAttempt.findMany({
+      where: {
+        userId,
+        answers: { some: {} }
+      },
+      select: 
+        { quizId: true },
+    });
+
+    const answeredQuizIds = [...new Set(attempts.map(a => a.quizId))];
+    return res.json(answeredQuizIds);
+  } catch (err) {
+    console.error("getAnsweredQuizzes error:", err);
+    return res.status(500).json({ error: "Erro ao buscar quizzes respondidos" });
+  }
+}
+
+module.exports = { submitAnswers, getQuiz, listQuizzes, getAnsweredQuizzes };

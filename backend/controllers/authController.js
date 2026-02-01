@@ -11,7 +11,13 @@ async function login(req, res) {
     const user = await syncUser(profile);
 
     return res.status(200).json({
-      user,
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        type: user.type,
+        consentAccepted: user.consentAccepted,
+      },
       eurecaToken: token
     });
 
