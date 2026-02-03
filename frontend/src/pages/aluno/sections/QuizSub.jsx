@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import Perguntas from "../sections/Perguntas";
 import { getQuiz, submitAnswers } from "../../../services/quiz";
 
-export default function QuizSub({ quizId }) {
+export default function QuizSub({ quizId, onDirtyChange }) {
   const [quiz, setQuiz] = useState(null);
   const [selected, setSelected] = useState({});
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [dirty, setDirty] = useState(false);
 
   useEffect(() => {
     let alive = true;
@@ -15,6 +16,8 @@ export default function QuizSub({ quizId }) {
       setMsg("");
       setQuiz(null);
       setSelected({});
+      setDirty(false);
+      onDirtyChange?.(false);
       try {
         const data = await getQuiz(quizId);
         if (alive) setQuiz(data);
@@ -30,6 +33,10 @@ export default function QuizSub({ quizId }) {
       alive = false;
     };
   }, [quizId]);
+  
+  useEffect(() => {
+    onDirtyChange?.(dirty);
+  }, [dirty, onDirtyChange]);
 
   async function handleSubmit() {
     if (!quiz) return;
@@ -44,7 +51,11 @@ export default function QuizSub({ quizId }) {
       }));
 
       const result = await submitAnswers({ quizId: quiz.id, answers });
+
       setMsg(`${result.message} (total: ${result.total})`);
+
+      setDirty(false);
+      onDirtyChange?.(false);
     } catch (err) {
       console.error(err);
       const backendMsg = err?.response?.data?.error || err?.response?.data?.details;
@@ -68,7 +79,14 @@ export default function QuizSub({ quizId }) {
         quizId={quiz.id}
         questions={quiz.questions}
         selected={selected}
-        setSelected={setSelected}
+        setSelected={(updater) => {
+          setSelected((prev) => {
+            const next = typeof updater === "function" ? updater(prev) : updater;
+            return next;
+          });
+          setDirty(true);
+        }}
+        
         onSubmit={handleSubmit}
         loading={loading}
       />

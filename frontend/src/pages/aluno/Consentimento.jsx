@@ -30,9 +30,9 @@ export default function Consentimento() {
 
   return (
     <div style={{ padding: 40, maxWidth: 800, margin: "auto", textAlign: "center" }}>
-      <h2>Termo de Consentimento</h2>
+      <h2 style={{ color: "#000" }}>Termo de Consentimento</h2>
 
-      <p style={{ marginBottom: 20 }}>
+      <p style={{ marginBottom: 20, color: "#000" }}>
         Para utilizar o <strong>EduTrack</strong> e participar da pesquisa, é necessário ler e aceitar o termo abaixo:
 
         Posteriormente também vai ser necessário assinar o documento através do SouGov.br para visualização do feedback.
@@ -65,7 +65,7 @@ export default function Consentimento() {
         </a>
       </div>
 
-      <p style={{ fontSize: "0.9rem", color: "#666", marginBottom: "20px" }}>
+      <p style={{ fontSize: "0.9rem", color: "#000", marginBottom: "20px" }}>
         Ao clicar no botão abaixo, você confirma que leu o documento acima e autoriza o uso de seus dados para fins de pesquisa, conforme a LGPD.
       </p>
 

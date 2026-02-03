@@ -12,15 +12,14 @@ export default function MenuAluno() {
         <ul>
           <li><Link className="botaoquest" to="/questionario">Responder questionário</Link></li>
           <li><Link className="botaofeedback" to="/feedbackAluno">Visualizar feedback</Link></li>
-          <li><button onClick={() => setHelp(!help)}>Help</button></li>
+          <li><button style={{color: '#000', backgroundColor: '#f0f0f0', border: '1px solid #ccc', padding: '10px 20px', borderRadius: '5px'}} onClick={() => setHelp(!help)}>Help</button></li>
         </ul>
         {help && (
-          <div className="help-container" style={{ border: "1px solid #ccc", padding: "20px", marginTop: "20px", borderRadius: "8px", backgroundColor: "white" }}>
-            <h3>Help</h3>
+          <div className="help-container">
             <ul>
-              <li><strong>Não precisa responder tudo hoje:</strong> Você pode responder subtópicos em momentos diferentes.</li>
-              <li><strong>Atenção:</strong> Responda todas as perguntas de uma sessão e clique em <strong>"Enviar"</strong> para salvar.</li>
-              <li><strong>Dica:</strong> Itens em <span style={{color: 'green', fontWeight: 'bold'}}>verde</span> já foram concluídos.</li>
+              <li>Não precisa responder tudo hoje, você pode responder subtópicos em momentos diferentes.</li>
+              <li> Responda todas as perguntas de uma sessão e clique em **Enviar** para salvar.</li>
+              <li>**Itens em verde** já foram concluídos.</li>
               <li>O feedback será liberado aos poucos conforme você avança.</li>
             </ul>
           </div>

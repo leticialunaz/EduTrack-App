@@ -5,10 +5,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server/index.js",
-    "start": "node server/index.js"
+    "start": "node server/index.js",
+    "seed": "prisma db seed",
+    "seed-disciplines": "prisma db seed",
+    "migrate": "prisma migrate deploy"
   },
   "prisma": {
-    "seed": "node prisma/seed.js"
+    "seed": "node prisma/seed.js",
+    "seed-disciplines": "node prisma/seed-Disciplines.js"
   },
   "keywords": [],
   "author": "",

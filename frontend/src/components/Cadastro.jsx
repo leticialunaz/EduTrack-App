@@ -98,7 +98,12 @@ function Cadastro() {
         {errorMsg && <p style={{ color: "red" }}>{errorMsg}</p>}
 
         <button type="submit" className="btn-login" disabled={loading}>
-          {loading ? "ENTRANDO..." : "ENTRAR"}
+          {loading ? (
+            <>
+              <span className="spinner"/>
+                ENTRANDO...
+            </>
+            ) : ("ENTRAR")}
         </button>
       </form>
     </div>

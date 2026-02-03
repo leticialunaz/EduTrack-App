@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 body,html {
@@ -74,6 +75,27 @@ nav li {
   color: white;
 }
 
+.help-container {
+  margin-top: 18px;
+  width: min(92vw, 700px);
+  padding: clamp(16px, 3vw, 32px);
+  border: 1px solid #ccc;
+  border-radius: 24px;
+  background-color: #fff;
+  color: #000;
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.help-container ul {
+  padding-left: 18px;
+}
+
+.help-container li + li {
+  margin-top: 10px;
+}
+
 
 
 
@@ -83,6 +105,7 @@ nav li {
     margin-top: 150px;
     min-height: 100vh;
   }
+  
 
   .botaoquest,
   .botaofeedback {
@@ -90,6 +113,15 @@ nav li {
     font-size: 1em;
     width: 100%;
   }
+
+  .help-container,
+  .help-container * {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
 }
+
+
 
 
