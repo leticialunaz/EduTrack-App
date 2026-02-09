@@ -27,7 +27,6 @@ export default function Consentimento() {
     }
   }
 
-
   return (
     <div style={{ padding: 40, maxWidth: 800, margin: "auto", textAlign: "center" }}>
       <h2 style={{ color: "#000" }}>Termo de Consentimento</h2>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../css/cadastro.css";
+import { useAuth } from "../context/AuthContext.jsx";
 import { Eye, EyeOff, User } from "lucide-react";
 
 import { login as loginSigaa } from "../services/auth"; 
@@ -15,15 +16,19 @@ function Cadastro() {
 
   const navigate = useNavigate();
 
+  const { setSession } = useAuth();
+  
   async function handleLogin(e) {
     e.preventDefault();
     setErrorMsg("");
     setLoading(true);
 
     try {
-      const user = await loginSigaa(username, password);
+      const loginResponse = await loginSigaa(username, password);
 
-      if (!user.consentAccepted) {
+      setSession(loginResponse);
+
+      if (!loginResponse.user.consentAccepted) {
         navigate("/consentimento");
       } else {
         navigate("/menuAluno");

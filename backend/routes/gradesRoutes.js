@@ -8,7 +8,9 @@ const { syncGradesOnce } = require("../services/gradesSyncService");
 router.post("/sync", sigaaAuth, async (req, res) => {
   try {
     const userId = req.appUser.id;
-    const matricula = req.user?.attributes?.aluno;
+    const matricula =
+    req.appUser?.matricula ||
+    req.user?.attributes?.aluno;
 
     if (!matricula) {
       return res.status(400).json({ error: "Matrícula não encontrada no token do Eureca." });

@@ -1,4 +1,5 @@
 const quizService = require('../services/quizService');
+const { syncGradesOnce } = require("../services/gradesSyncService");
 
 
 // recebe as respostas de um aluno, verifica se os dados estão corretos e salva no banco
@@ -44,6 +45,8 @@ async function submitAnswers(req, res) {
 
     if (qid === 13) {
       const matricula = req.appUser.matricula;
+
+
       if (matricula) {
         syncGradesOnce({
           userId: req.appUser.id,
