@@ -3,10 +3,26 @@ const router = express.Router();
 const prisma = require("../prisma/client");
 const { sigaaAuth } = require("../middlewares/sigaaAuth");
 
-// POST /api/consent/accept
-router.post("/accept", sigaaAuth, async (req, res) => {
+const multer = require("multer");
+
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: { fileSize: 5 * 1024 * 1024 }, 
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype !== "application/pdf") {
+      return cb(new Error("Apenas PDF é permitido"));
+    }
+    cb(null, true);
+  },
+});
+
+router.post("/accept", sigaaAuth, upload.single("file"), async (req, res) => {
   try {
-    const user = await prisma.user.update({
+    if (!req.file) {
+      return res.status(400).json({ error: "Arquivo não enviado" });
+    }
+
+    const updatedUser = await prisma.user.update({
       where: { id: req.appUser.id },
       data: {
         consentAccepted: true,
@@ -14,12 +30,40 @@ router.post("/accept", sigaaAuth, async (req, res) => {
       },
     });
 
-    res.json({
-      message: "Termo de consentimento aceito",
-      user,
+    await prisma.consentFile.upsert({
+      where: { userId: req.appUser.id },
+      update: {
+        filename: req.file.originalname,
+        mimeType: req.file.mimetype,
+        size: req.file.size,
+        data: req.file.buffer,
+      },
+      create: {
+        userId: req.appUser.id,
+        filename: req.file.originalname,
+        mimeType: req.file.mimetype,
+        size: req.file.size,
+        data: req.file.buffer,
+      },
+    });
+
+    return res.json({
+      message: "Termo de consentimento aceito e arquivo anexado",
+      user: {
+        id: updatedUser.id,
+        name: updatedUser.name,
+        email: updatedUser.email,
+        type: updatedUser.type,
+        consentAccepted: updatedUser.consentAccepted,
+        consentAt: updatedUser.consentAt,
+        hasConsentFile: true,
+      },
     });
   } catch (err) {
-    res.status(500).json({ error: "Erro ao salvar consentimento" });
+    console.error(err);
+
+    const msg = err?.message || "Erro ao salvar consentimento";
+    return res.status(500).json({ error: msg });
   }
 });
 
