@@ -73,7 +73,7 @@ const { getQuizById } = require('../services/quizService');
 //busca detalhes de um quiz pelo ID
 async function getQuiz(req, res) {
   try {
-    const quiz = await getQuizById(req.params.quizId);
+    const quiz = await getQuizById(req.params.quizId, req.appUser.id);
 
     if (!quiz) {
       return res.status(404).json({ error: 'Quiz não encontrado' });

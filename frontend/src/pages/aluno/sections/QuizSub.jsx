@@ -20,7 +20,19 @@ export default function QuizSub({ quizId, onDirtyChange }) {
       onDirtyChange?.(false);
       try {
         const data = await getQuiz(quizId);
-        if (alive) setQuiz(data);
+        if (alive) {
+          setQuiz(data);
+
+          if (data.userAnswers && data.userAnswers.length > 0) {
+          const storedAnswers = {};
+          data.userAnswers.forEach(ans => {
+            storedAnswers[ans.questionId] = ans.answerId;
+          });
+          setSelected(storedAnswers);
+          setDirty(false); 
+          onDirtyChange?.(false);
+          }
+        }
       } catch (err) {
         console.error(err);
         if (alive) setMsg("Erro ao carregar quiz.");

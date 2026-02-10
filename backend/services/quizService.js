@@ -91,7 +91,7 @@ async function saveStudentAnswers({ userId, attemptId, answers }) {
 }
 
 //função para obter os detalhes de um quiz pelo ID
-async function getQuizById(quizId) {
+async function getQuizById(quizId, userId = null) {
   const qid = Number(quizId);
   if (!Number.isInteger(qid)) return null;
 
@@ -107,7 +107,20 @@ async function getQuizById(quizId) {
       }
     }
   });
-    return quiz;
+
+  if (quiz && userId) {
+    const userAnswers = await prisma.studentAnswer.findMany({
+      where: {
+        userId: userId,
+        questionId: { in: quiz.questions.map(q => q.id) }
+      },
+      select: { questionId: true, answerId: true }
+    });
+    
+    quiz.userAnswers = userAnswers;
+  }
+
+  return quiz;
 }
 
 module.exports = {
