@@ -4,7 +4,11 @@ import { api } from "../services/api";
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [sessionAccepted, setSessionAccepted] = useState(false);
+  const [user, setUser] = useState(() => {
+    const saved = localStorage.getItem("user");
+    return saved ? JSON.parse(saved) : null;
+  });
   const [loadingAuth, setLoadingAuth] = useState(true);
 
   useEffect(() => {
@@ -42,7 +46,7 @@ export function AuthProvider({ children }) {
   }
 
   return (
-    <AuthContext.Provider value={{ user, setUser, setSession, logout, loadingAuth }}>
+    <AuthContext.Provider value={{ user, sessionAccepted, setSessionAccepted,setUser, setSession, logout, loadingAuth }}>
       {children}
     </AuthContext.Provider>
   );

@@ -9,7 +9,7 @@ export default function Consentimento() {
   const [msg, setMsg] = useState("");
   const navigate = useNavigate();
   const [file, setFile] = useState(null);
-  const { setUser } = useAuth();
+  const { setUser, setSessionAccepted } = useAuth();
 
   function handleFileChange(e) {
     const f = e.target.files?.[0] || null;
@@ -42,10 +42,13 @@ export default function Consentimento() {
 
     try {
       const formData = new FormData();
-      formData.append("file", file);
+      if (file) {
+        formData.append("file", file);
+     }
 
       const data = await acceptConsent(formData);
       setUser(data.user);
+      setSessionAccepted(true);
       navigate("/menuAluno");
 
     } catch (err) {
@@ -141,4 +144,3 @@ export default function Consentimento() {
     </div>
   );
 }
-

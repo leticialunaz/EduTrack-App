@@ -36,42 +36,32 @@ async function syncGradesOnce({ userId, token, matricula }) {
   let saved = 0;
 
   for (const h of historico) {
-    const status = normalizeStatus(h.status);
-    if (!status) continue;
+  const rawStatus = h.status ?? h.situacao ?? h.situacao_final;
+  const status = normalizeStatus(rawStatus);
+  if (!status) continue;
 
-    const grade = Number(h.media_final);
-    if (!Number.isFinite(grade)) continue;
+  const grade = Number(String(h.media_final ?? h.mediaFinal ?? "").replace(",", "."));
+  if (!Number.isFinite(grade)) continue;
 
-    const disciplineName = normalizeDisciplineName(h.nome_da_disciplina);
-    if (!disciplineName) continue;
+  const disciplineName = normalizeDisciplineName(
+    h.nome_da_disciplina ?? h.disciplina ?? h.nomeDisciplina ?? h.descricao_disciplina
+  );
+  if (!disciplineName) continue;
 
-    const disc = await prisma.discipline.upsert({
-      where: { name: disciplineName },
-      update: {},
-      create: { name: disciplineName },
-    });
+  const disc = await prisma.discipline.upsert({
+    where: { name: disciplineName },
+    update: {},
+    create: { name: disciplineName },
+  });
 
-    await prisma.studentGrade.upsert({
-      where: {
-        userId_disciplineId: {
-          userId,
-          disciplineId: disc.id,
-        },
-      },
-      update: {
-        grade,
-        status, 
-      },
-      create: {
-        userId,
-        disciplineId: disc.id,
-        grade,
-        status, 
-      },
-    });
+  await prisma.studentGrade.upsert({
+    where: { userId_disciplineId: { userId, disciplineId: disc.id } },
+    update: { grade, status },
+    create: { userId, disciplineId: disc.id, grade, status },
+  });
 
-    saved++;
-  }
+  saved++;
+}
 
   return { totalHistorico: historico.length, totalSalvas: saved };
 }

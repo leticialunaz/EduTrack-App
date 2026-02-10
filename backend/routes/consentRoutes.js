@@ -18,9 +18,9 @@ const upload = multer({
 
 router.post("/accept", sigaaAuth, upload.single("file"), async (req, res) => {
   try {
-    if (!req.file) {
-      return res.status(400).json({ error: "Arquivo não enviado" });
-    }
+    //if (!req.file) {
+    //  return res.status(400).json({ error: "Arquivo não enviado" });
+    //}
 
     const updatedUser = await prisma.user.update({
       where: { id: req.appUser.id },
@@ -29,7 +29,7 @@ router.post("/accept", sigaaAuth, upload.single("file"), async (req, res) => {
         consentAt: new Date(),
       },
     });
-
+  if (req.file) {
     await prisma.consentFile.upsert({
       where: { userId: req.appUser.id },
       update: {
@@ -46,9 +46,10 @@ router.post("/accept", sigaaAuth, upload.single("file"), async (req, res) => {
         data: req.file.buffer,
       },
     });
+  }
 
     return res.json({
-      message: "Termo de consentimento aceito e arquivo anexado",
+      message: "Termo de consentimento aceito",
       user: {
         id: updatedUser.id,
         name: updatedUser.name,
@@ -56,7 +57,7 @@ router.post("/accept", sigaaAuth, upload.single("file"), async (req, res) => {
         type: updatedUser.type,
         consentAccepted: updatedUser.consentAccepted,
         consentAt: updatedUser.consentAt,
-        hasConsentFile: true,
+        hasConsentFile: !!req.file || false,
       },
     });
   } catch (err) {

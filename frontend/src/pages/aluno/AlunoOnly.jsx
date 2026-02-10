@@ -2,7 +2,7 @@ import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 
 export default function AlunoOnly() {
-  const { user, loadingAuth } = useAuth();
+  const { user, loadingAuth, sessionAccepted } = useAuth();
   const location = useLocation();
 
   if (loadingAuth) return <p>Carregando...</p>;
@@ -11,14 +11,10 @@ export default function AlunoOnly() {
 
   if (user.type !== "Aluno") return <Navigate to="/acesso-negado" replace />;
 
-  const needsConsent = !user.consentAccepted || !user.hasConsentFile;
+  const needsToSeeTerm = !sessionAccepted;
 
-  if (needsConsent && location.pathname !== "/consentimento") {
+  if (needsToSeeTerm && location.pathname !== "/consentimento") {
     return <Navigate to="/consentimento" replace />;
-  }
-
-  if (!needsConsent && location.pathname === "/consentimento") {
-    return <Navigate to="/menuAluno" replace />;
   }
 
   return <Outlet />;

@@ -43,7 +43,7 @@ async function submitAnswers(req, res) {
       data: { finishedAt: new Date() }
     });
 
-    if (qid === 13) {
+    if (qid === 1) {
       const matricula = req.appUser.matricula;
 
 
