@@ -43,18 +43,6 @@ async function submitAnswers(req, res) {
       data: { finishedAt: new Date() }
     });
 
-    if (qid === 1) {
-      const matricula = req.appUser.matricula;
-
-
-      if (matricula) {
-        syncGradesOnce({
-          userId: req.appUser.id,
-          token: req.eurecaToken,
-          matricula,
-        }).catch((e) => console.error("Sync grades failed:", e.message));
-      }
-    }
 
     return res.status(201).json({
       message: 'Respostas salvas com sucesso',

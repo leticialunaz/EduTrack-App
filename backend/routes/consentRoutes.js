@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const prisma = require("../prisma/client");
 const { sigaaAuth } = require("../middlewares/sigaaAuth");
+const { syncGradesOnce } = require("../services/gradesSyncService");
 
 const multer = require("multer");
 
@@ -46,6 +47,23 @@ router.post("/accept", sigaaAuth, upload.single("file"), async (req, res) => {
         data: req.file.buffer,
       },
     });
+  }
+  const matricula = req.appUser?.matricula || req.user?.attributes?.aluno;
+  const token = req.eurecaToken;
+
+  if (matricula && token) {
+    syncGradesOnce({ 
+      userId: req.appUser.id, 
+      token: token, 
+      matricula: matricula })
+      .then(result => {
+        console.log(`Sincronização concluída: ${result.totalSalvas} notas.`);
+      })
+      .catch(err => {
+        console.error("Falha na sincronização automática:", err.message);
+      });
+  } else {
+    console.warn("Matrícula ou token ausente, pulando sincronização automática.");
   }
 
     return res.json({

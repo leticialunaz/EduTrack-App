@@ -98,7 +98,6 @@ const BANK = {
   Institucional: {
     "Adaptação à instituição": [
       "Mesmo que pudesse não mudaria de Universidade",
-      "Faço amigos com facilidade na minha Universidade",
       "Gosto da Universidade que frequento",
       "Conheço bem os serviços existentes na minha Universidade.",
       "Gostaria de concluir o meu curso na instituição que agora frequento.",
