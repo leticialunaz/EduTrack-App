@@ -1,6 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
+
+
+
+const { transporter } = require('../jobs/emailJob')
 
 const app = express();
 
@@ -28,6 +32,29 @@ app.use("/api/grades", require("../routes/gradesRoutes"));
 
 app.get("/", (req, res) => {
   res.send("Backend funcionando!");
+});
+
+app.get("/api/test-config", async (req, res) => {
+    try {
+        await transporter.verify();
+        res.send("Conexão com Gmail OK!");
+    } catch (error) {
+        res.status(500).send("Erro na conexão: " + error.message);
+    }
+});
+
+app.get("/api/test-send", async (req, res) => {
+    try {
+        await transporter.sendMail({ // Agora ele reconhece o 'transporter'
+            from: '"Teste" <seu-email@gmail.com>',
+            to: 'leticialunadb@gmail.com',
+            subject: 'Teste',
+            text: 'Funcionou!'
+        });
+        res.send("E-mail enviado!");
+    } catch (error) {
+        res.status(500).send("Erro: " + error.message);
+    }
 });
 
 
