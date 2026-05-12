@@ -1,5 +1,6 @@
 import numpy as np
 import skfuzzy as fuzz
+import matplotlib.pyplot as plt
 from skfuzzy import control as ctrl
 
 #teste para tópico de carreira
@@ -68,3 +69,19 @@ sistema_ctrl = ctrl.ControlSystem([
     regra4, regra5, regra6, 
     regra7, regra8, regra9
 ])
+
+sistema = ctrl.ControlSystemSimulation(sistema_ctrl)
+
+sistema.input['q18'] = 4
+sistema.input['q19'] = 5
+
+sistema.compute()
+result = sistema.output['rendimento']
+
+print(result)
+if(result < 4): print("baixo")
+elif(result < 7): print("medio")
+elif(result < 9): print("alto")
+else: print("muito alto")
+
+
