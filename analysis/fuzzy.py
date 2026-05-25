@@ -107,7 +107,7 @@ for _, linha in df_regras.iterrows():
     transacoes.append(transacao)
 
 
-#uso do modelo apriori para extrair regras de associação
+#extrair regras de associação baseadas em frequência ou dominância
 
 regras = []
 
