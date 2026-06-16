@@ -1,0 +1,67 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}
+
+body,html {
+  overflow-x: hidden;
+}
+
+
+/* Container principal para centralizar toda a página */
+.feedback-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 250px;
+  box-sizing: border-box;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+#title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5em;
+  color: #1c1c1c;
+  font-weight: bold;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-family: Inter, Inter;
+}
+
+#botaofeedback {
+  display: flex;
+  background-color: #1c1c1c;
+  color: white;
+  padding: 15px 400px;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s ease;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  font-size: 1.2em;
+  font-weight: 500;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+#botaofeedback:hover {
+  background-color: #494747;
+  color: white;
+}
+
+@media (max-width: 768px) {
+    #botaofeedback {
+        padding: 30px 15px;;
+        font-size: 1em;
+        width: 100%;
+    }
+
+}
