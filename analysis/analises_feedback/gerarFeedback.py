@@ -7,6 +7,8 @@ import sys
 import matplotlib.pyplot as plt
 import scipy.stats as stats
 
+from pdf_feedback import gerar_pdf_feedback
+
 def computaModelo(itens_sel, df_topico):
 	
 	y = df_topico['media_final']
@@ -264,9 +266,11 @@ resultado = gerar_feedback_multiplo(df_aluno_row,
                              beta_0, beta_1, beta_2,
                              nome_atrib1='Q18 - Não sinto uma correspondência entre o meu nível de investimento e os resultados acadêmicos obtidos.',
                              nome_atrib2='Q19 - Consigo habitualmente atingir os objetivos acadêmicos a que me proponho.')
+
+gerar_pdf_feedback(df_aluno_row['name'], resultado)
 texto = texto_feedback_multiplo(resultado)
 
 print("Feedback \n", texto)
 print("nota real: ", df_aluno_row['media_final'])
-print(df_original.iloc[0]['name'])
+
 
